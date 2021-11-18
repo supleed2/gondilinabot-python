@@ -27,9 +27,10 @@ async def on_message(message):
         return
     else:
         global counter
-        print("Message from " + message.author.name + ": " + message.content)
-        reply = re.split("(^| )(I'm |Im |i'm |im |I am |i am )", message.content, 1)
+        # TODO: Add detection for "genshin" and replace with "g*nshin"
+        reply = re.split("(^| )(I'm|Im|i'm|im|I am|i am)( )", message.content, 1)
         if len(reply) > 1:
+            print("Message from " + message.author.name + ": " + message.content)
             if counter > 0:
                 counter -= 1
                 print("Cooldown: " + str(counter) + " messages")
@@ -37,8 +38,6 @@ async def on_message(message):
                 counter = random.randrange(mincooldown, maxcooldown)
                 await message.reply("Hi " + reply[1] + ", I'm Dad")
                 print("Replied to " + message.author.name + " with Dad Joke")
-        else:
-            print("No match, ignoring...")
 
 
 with open("secrets.yaml") as stream:

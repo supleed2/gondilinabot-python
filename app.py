@@ -6,8 +6,9 @@ import random
 # from discord.ext import commands
 
 bot = discord.Client()
-sensitivity = 5
-counter = random.randrange(0, sensitivity)
+mincooldown = 3
+maxcooldown = 10
+counter = random.randrange(mincooldown, maxcooldown)
 
 
 @bot.event
@@ -33,7 +34,7 @@ async def on_message(message):
                 counter -= 1
                 print("Cooldown: " + str(counter) + " messages")
             else:
-                counter = random.randrange(0, sensitivity)
+                counter = random.randrange(mincooldown, maxcooldown)
                 await message.reply("Hi " + reply[1] + ", I'm Dad")
                 print("Replied to " + message.author.name + " with Dad Joke")
         else:

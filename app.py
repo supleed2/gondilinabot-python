@@ -28,7 +28,7 @@ async def on_message(message):
     else:
         global counter
         print("Message from " + message.author.name + ": " + message.content)
-        reply = re.split("I'm |Im |i'm |im |I am |i am ", message.content, 1)
+        reply = re.split("(^| )(I'm |Im |i'm |im |I am |i am )", message.content, 1)
         if len(reply) > 1:
             if counter > 0:
                 counter -= 1

@@ -31,6 +31,15 @@ async def on_message(message):
         reply = re.split("(^| )(I'm|Im|i'm|im|I am|i am)( )", message.content, 1)
         if len(reply) > 1:
             print("Message from " + message.author.name + ": " + message.content)
+            print(
+                "Reply: Length:"
+                + len(reply)
+                + ", Contents: {"
+                + reply[0]
+                + "}, {"
+                + reply[1]
+                + "}"
+            )
             if counter > 0:
                 counter -= 1
                 print("Cooldown: " + str(counter) + " messages")

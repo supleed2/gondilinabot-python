@@ -33,11 +33,9 @@ async def on_message(message):
             print("Message from " + message.author.name + ": " + message.content)
             print(
                 "Reply: Length:"
-                + len(reply)
-                + ", Contents: {"
-                + reply[0]
-                + "}, {"
-                + reply[1]
+                + str(len(reply))
+                + ", Final Contents: {"
+                + reply[-1]
                 + "}"
             )
             if counter > 0:
@@ -45,7 +43,7 @@ async def on_message(message):
                 print("Cooldown: " + str(counter) + " messages")
             else:
                 counter = random.randrange(mincooldown, maxcooldown)
-                await message.reply("Hi " + reply[1] + ", I'm Dad")
+                await message.reply("Hi " + reply[-1] + ", I'm Dad")
                 print("Replied to " + message.author.name + " with Dad Joke")
 
 

@@ -27,7 +27,7 @@ async def on_message(message):
     if message.author == bot.user:
         return
     elif message.author.id == 581890740360052764:
-        reply = re.split("(^| )(I'm|Im|i'm|im|I am|i am)( )", message.content, 1)
+        reply = re.split("(^| )(I'M|IM|I AM|I'm|Im|I am|i'm|im|i am)( )", message.content, 1)
         if len(reply) > 1:
             print("Message from " + message.author.name + ": " + message.content)
             print(
@@ -44,7 +44,7 @@ async def on_message(message):
     else:
         global counter
         # TODO: Add detection for "genshin" and replace with "g*nshin"
-        reply = re.split("(^| )(I'm|Im|i'm|im|I am|i am)( )", message.content, 1)
+        reply = re.split("(^| )(I'M|IM|I AM|I'm|Im|I am|i'm|im|i am)( )", message.content, 1)
         if len(reply) > 1:
             print("Message from " + message.author.name + ": " + message.content)
             print(

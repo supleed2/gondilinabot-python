@@ -70,7 +70,13 @@ async def on_message(message):
                 print("Replied to " + message.author.name + " with Dad Joke")
         else:
             idleMessageCounter += 1
-            print("Idle Message Counter: " + str(idleMessageCounter), end="\r")
+            if idleMessageCounter % 5 == 0:
+                await bot.change_presence(
+                    status=discord.Status.online,
+                    activity=discord.Game(
+                        name="with Godlina [" + str(idleMessageCounter) + "]"
+                    ),
+                )
 
 
 with open("secrets.yaml") as stream:

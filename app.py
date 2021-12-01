@@ -25,8 +25,19 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
+    global counter
+    global idleMessageCounter
     if message.author == bot.user:
         return
+    elif bool(re.search("\|\|", message.content)):
+        idleMessageCounter += 1
+        if idleMessageCounter % 5 == 0:
+            await bot.change_presence(
+                status=discord.Status.online,
+                activity=discord.Game(
+                    name="with Godlina [" + str(idleMessageCounter) + "]"
+                ),
+            )
     elif message.author.id == 581890740360052764:
         reply = re.split(
             "(^| )(I'M|IM|I AM|I'm|Im|I am|i'm|im|i am)( )", message.content, 1
@@ -45,8 +56,6 @@ async def on_message(message):
                 "Replied unconditionally to " + message.author.name + " with Dad Joke"
             )
     else:
-        global counter
-        global idleMessageCounter
         # TODO: Add detection for "genshin" and replace with "g*nshin"
         reply = re.split(
             "(^| )(I'M|IM|I AM|I'm|Im|I am|i'm|im|i am)( )", message.content, 1

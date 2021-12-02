@@ -2,6 +2,7 @@ import discord
 import re
 import yaml
 import random
+import aiocron
 
 # from discord.ext import commands
 
@@ -86,6 +87,12 @@ async def on_message(message):
                         name="with Godlina [" + str(idleMessageCounter) + "]"
                     ),
                 )
+
+
+@aiocron.crontab("0 0 * * *")  # Runs every day at midnight
+async def steal_first_message():
+    channel = bot.get_channel(249891637008793600)
+    await channel.send("<@295575162869383169> Not this time :)")
 
 
 with open("secrets.yaml") as stream:

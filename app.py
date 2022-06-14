@@ -16,9 +16,9 @@ idleMessageCounter = 0
 @bot.event
 async def on_ready():
     print("Logged in as")
-    print(bot.user.name + "#" + bot.user.discriminator)
+    print(f"{bot.user.name}#{bot.user.discriminator}")
     print(bot.user.id)
-    print("Init Counter: " + str(counter))
+    print(f"Init Counter: {str(counter)}")
     await bot.change_presence(
         status=discord.Status.online, activity=discord.Game(name="with Godlina")
     )
@@ -36,7 +36,7 @@ async def on_message(message):
             await bot.change_presence(
                 status=discord.Status.online,
                 activity=discord.Game(
-                    name="with Godlina [" + str(idleMessageCounter) + "]"
+                    name=f"with Godlina [{idleMessageCounter}]"
                 ),
             )
     elif message.author.id == 581890740360052764:
@@ -44,7 +44,7 @@ async def on_message(message):
             "(^| )(I'M|IM|I AM|I'm|Im|I am|i'm|im|i am)( )", message.content, 1
         )
         if len(reply) > 1:
-            print("Message from " + message.author.name + ": " + message.content)
+            print(f"Message from {message.author.name}: {message.content}")
             print(
                 "Reply: Length:"
                 + str(len(reply))
@@ -52,9 +52,9 @@ async def on_message(message):
                 + reply[-1]
                 + "}"
             )
-            await message.reply("Hi " + reply[-1] + ", I'm Dad")
+            await message.reply(f"Hi {reply[-1]}, I'm Dad")
             print(
-                "Replied unconditionally to " + message.author.name + " with Dad Joke"
+                f"Replied unconditionally to {message.author.name} with Dad Joke"
             )
     else:
         # TODO: Add detection for "genshin" and replace with "g*nshin"
@@ -63,7 +63,7 @@ async def on_message(message):
         )
         if len(reply) > 1:
             idleMessageCounter = 0
-            print("Message from " + message.author.name + ": " + message.content)
+            print(f"Message from {message.author.name}: {message.content}")
             print(
                 "Reply: Length:"
                 + str(len(reply))
@@ -73,18 +73,18 @@ async def on_message(message):
             )
             if counter > 0:
                 counter -= 1
-                print("Cooldown: " + str(counter) + " messages")
+                print(f"Cooldown: {counter} messages")
             else:
                 counter = random.randrange(mincooldown, maxcooldown)
-                await message.reply("Hi " + reply[-1] + ", I'm Dad")
-                print("Replied to " + message.author.name + " with Dad Joke")
+                await message.reply(f"Hi {reply[-1]}, I'm Dad")
+                print(f"Replied to {message.author.name} with Dad Joke")
         else:
             idleMessageCounter += 1
             if idleMessageCounter % 5 == 0:
                 await bot.change_presence(
                     status=discord.Status.online,
                     activity=discord.Game(
-                        name="with Godlina [" + str(idleMessageCounter) + "]"
+                        name=f"with Godlina [{idleMessageCounter}]"
                     ),
                 )
 
@@ -101,7 +101,5 @@ with open("secrets.yaml") as stream:
     except yaml.YAMLError as exc:
         print(exc)
         print("Secrets.yaml failed to load, exiting...")
-        raise SystemExit
-
-
+        raise SystemExit from exc
 bot.run(secrets["bottoken"])
